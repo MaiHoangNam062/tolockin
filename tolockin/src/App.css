@@ -93,3 +93,22 @@ h1 {
   border: none;
   width: 150px;
 }
+
+.todo-input-item input:focus {
+  outline: 2px solid #61dafb;
+}
+
+.primaryBtn {
+  background-color: #131312;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  margin-top: 25px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.primaryBtn:hover {
+  background-color: #61dafb;
+  color: black;
+}

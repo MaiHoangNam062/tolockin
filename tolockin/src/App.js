@@ -47,7 +47,7 @@ function App() {
           </div>
 
           <div className='todo-input-item'>
-            <button type='button'>Add task</button>
+            <button type='button' className='primaryBtn'>Add task</button>
           </div>
         </div>
 
