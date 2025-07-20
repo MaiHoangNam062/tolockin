@@ -128,3 +128,22 @@ h1 {
   background-color: #61dafb;
   color: black;
 }
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-area {
+  margin-bottom: 15px;
+}
+
+.todo-list-item {
+  background-color: #131312;
+  display: flex;
+  justify-content: space-between;
+  padding: 25px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}

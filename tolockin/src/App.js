@@ -59,9 +59,11 @@ function App() {
             <button className={`secondaryBtn ${isCompleteScreeen===true && 'active'}`} onClick={()=>setIsCompleteScreen(true)}>Completed</button>
           </div>
 
-          <div>
-            <h2>Task 1</h2>
-            <label>Description</label>
+          <div className='todo-list'>
+            <div className='todo-list-item'>
+              <h3>Task 1</h3>
+              <p>Description</p>
+            </div>
           </div>
         </div>
       
