@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [isCompleteScreeen, setIsCompleteScreen] = useState(false);
   return (
     <div className="App">
       {/*
@@ -53,8 +55,8 @@ function App() {
 
         <div className='todo-output'>
           <div className='btn-area'>
-            <button>Todo</button>
-            <button>Completed</button>
+            <button className={`secondaryBtn ${isCompleteScreeen===false && 'active'}`} onClick={()=>setIsCompleteScreen(false)}>Todo</button>
+            <button className={`secondaryBtn ${isCompleteScreeen===true && 'active'}`} onClick={()=>setIsCompleteScreen(true)}>Completed</button>
           </div>
 
           <div>
