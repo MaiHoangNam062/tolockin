@@ -142,8 +142,46 @@ h1 {
   background-color: #131312;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 25px;
   padding-bottom: 10px;
   padding-top: 10px;
   margin-bottom: 10px;
+}
+
+.todo-list-item h3 {
+  font-size: 20px;
+  color: #61dafb;
+  font-weight: bold;
+  margin: 0;
+}
+
+.todo-input-item p {
+  font-size: 14px;
+  color: white;
+  margin-top: 8px;
+}
+
+.todo-list-item-icons {
+  display: flex;
+  align-items: center;
+}
+
+.delete-icon {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.delete-icon:hover {
+  color: red;
+}
+
+.check-icon {
+  font-size: 20px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.check-icon:hover {
+  color: green;
 }

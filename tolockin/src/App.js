@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import { FaCalendarCheck } from "react-icons/fa";
 
 function App() {
   const [isCompleteScreeen, setIsCompleteScreen] = useState(false);
@@ -61,8 +63,15 @@ function App() {
 
           <div className='todo-list'>
             <div className='todo-list-item'>
-              <h3>Task 1</h3>
-              <p>Description</p>
+              <div>
+                <h3>Task 1</h3>
+                <p>Description</p>
+              </div>
+
+              <div className='todo-list-item-icons'>
+                <MdOutlineDeleteOutline className='delete-icon' />
+                <FaCalendarCheck className='check-icon' />
+              </div>
             </div>
           </div>
         </div>
