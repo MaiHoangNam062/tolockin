@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { FaCalendarCheck } from "react-icons/fa";
 
@@ -21,11 +21,28 @@ function App() {
     let updatedTodoArr = [...allTodos]; // Create a copy of the current todos array
     updatedTodoArr.push(newTodoItem);
     setTodos(updatedTodoArr);
+
+    localStorage.setItem('todolist', JSON.stringify(updatedTodoArr)); // Save to local storage
   }
 
   const handlePriorityChange = (e) => {
     setNewPriority(e.target.value);
   }
+
+  const handleDeleteTodo = (index) => {
+    let reducedTodos = [...allTodos];
+    reducedTodos.splice(index);
+
+    localStorage.setItem('todolist', JSON.stringify(reducedTodos));
+    setTodos(reducedTodos);
+  }
+
+  useEffect(() => {
+    let savedTodos = JSON.parse(localStorage.getItem('todolist'));
+    if (savedTodos) {
+      setTodos(savedTodos);
+    }
+  }, [])
 
   return (
     <div className="App">
@@ -65,9 +82,9 @@ function App() {
           <div className='todo-input-item'>
             <label>Priority</label>
               <select value={newPriority} onChange={handlePriorityChange}>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
               </select>
           </div>
 
@@ -105,7 +122,7 @@ function App() {
                   </div>
 
                   <div className='todo-list-item-icons'>
-                    <MdOutlineDeleteOutline className='delete-icon' />
+                    <MdOutlineDeleteOutline className='delete-icon' onClick={()=>handleDeleteTodo(index)}/>
                     <FaCalendarCheck className='check-icon' />
                   </div>
                 </div>
