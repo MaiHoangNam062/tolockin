@@ -5,7 +5,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { FaCalendarCheck } from "react-icons/fa";
 
 function App() {
-  const [isCompleteScreeen, setIsCompleteScreen] = useState(false);
+  const [isCompleteScreen, setIsCompleteScreen] = useState(false);
   const [allTodos, setTodos] = useState([]); // Contain all to-do list items
   const [newTitle, setNewTitle] = useState(''); // To-do title input
   const [newDescription, setNewDescription] = useState(''); // To-do description input
@@ -56,6 +56,7 @@ function App() {
     let updatedCompletedArr = [...completedTodos];
     updatedCompletedArr.push(filteredItem);
     setCompletedTodos(updatedCompletedArr);
+    handleDeleteTodo(index);
   }
 
   useEffect(() => {
@@ -103,6 +104,7 @@ function App() {
           <div className='todo-input-item'>
             <label>Priority</label>
               <select value={newPriority} onChange={handlePriorityChange}>
+                <option value="">None</option>
                 <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
@@ -116,8 +118,8 @@ function App() {
 
         <div className='todo-output'>
           <div className='btn-area'>
-            <button className={`secondaryBtn ${isCompleteScreeen===false && 'active'}`} onClick={()=>setIsCompleteScreen(false)}>Todo</button>
-            <button className={`secondaryBtn ${isCompleteScreeen===true && 'active'}`} onClick={()=>setIsCompleteScreen(true)}>Completed</button>
+            <button className={`secondaryBtn ${isCompleteScreen===false && 'active'}`} onClick={()=>setIsCompleteScreen(false)}>Todo</button>
+            <button className={`secondaryBtn ${isCompleteScreen===true && 'active'}`} onClick={()=>setIsCompleteScreen(true)}>Completed</button>
           </div>
 
           <div className='todo-list'>
@@ -133,7 +135,7 @@ function App() {
               </div>
             </div> */}
 
-            {isCompletedScreen === false && allTodos.map((item, index) => {
+            {isCompleteScreen === false && allTodos.map((item, index) => {
               return (
                 <div className='todo-list-item' key={index}>
                   <div>
@@ -151,7 +153,7 @@ function App() {
             }
             )}
 
-            {isCompletedScreen === true && completedTodos.map((item, index) => {
+            {isCompleteScreen === true && completedTodos.map((item, index) => {
               return (
                 <div className='todo-list-item' key={index}>
                   <div>
