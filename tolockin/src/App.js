@@ -10,6 +10,7 @@ function App() {
   const [newTitle, setNewTitle] = useState(''); // To-do title input
   const [newDescription, setNewDescription] = useState(''); // To-do description input
   const [newPriority, setNewPriority] = useState(''); // To-do priority input
+  const [completedTodos, setCompletedTodos] = useState([]);
 
   const handleAddTodo = () => {
     let newTodoItem = {
@@ -35,6 +36,26 @@ function App() {
 
     localStorage.setItem('todolist', JSON.stringify(reducedTodos));
     setTodos(reducedTodos);
+  }
+
+  const handleCompletedTodo = (index) => {
+    let now = new Date();
+    let dd = now.getDate();
+    let mm = now.getMonth() + 1; // January is 0
+    let yyyy = now.getFullYear();
+    let h = now.getHours();
+    let m = now.getMinutes();
+    let s = now.getSeconds();
+    let completedTime = `${dd}/${mm}/${yyyy}`;
+
+    let filteredItem = {
+      ...allTodos[index],
+      completedTime: completedTime
+    }
+
+    let updatedCompletedArr = [...completedTodos];
+    updatedCompletedArr.push(filteredItem);
+    setCompletedTodos(updatedCompletedArr);
   }
 
   useEffect(() => {
@@ -112,7 +133,7 @@ function App() {
               </div>
             </div> */}
 
-            {allTodos.map((item, index) => {
+            {isCompletedScreen === false && allTodos.map((item, index) => {
               return (
                 <div className='todo-list-item' key={index}>
                   <div>
@@ -123,7 +144,25 @@ function App() {
 
                   <div className='todo-list-item-icons'>
                     <MdOutlineDeleteOutline className='delete-icon' onClick={()=>handleDeleteTodo(index)}/>
-                    <FaCalendarCheck className='check-icon' />
+                    <FaCalendarCheck className='check-icon' onClick={()=>handleCompletedTodo(index)}/>
+                  </div>
+                </div>
+              )
+            }
+            )}
+
+            {isCompletedScreen === true && completedTodos.map((item, index) => {
+              return (
+                <div className='todo-list-item' key={index}>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    <p>Priority: {item.priority}</p>
+                    <p><small>Completed on: {item.completedTime}</small></p>
+                  </div>
+
+                  <div className='todo-list-item-icons'>
+                    <MdOutlineDeleteOutline className='delete-icon' onClick={()=>handleDeleteTodo(index)}/>
                   </div>
                 </div>
               )
