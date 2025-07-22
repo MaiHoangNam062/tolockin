@@ -6,10 +6,10 @@ import { FaCalendarCheck } from "react-icons/fa";
 
 function App() {
   const [isCompleteScreeen, setIsCompleteScreen] = useState(false);
-  const [allTodos, setTodos] = useState([]);
-  const [newTitle, setNewTitle] = useState('');
-  const [newDescription, setNewDescription] = useState('');
-  const [newPriority, setNewPriority] = useState('low');
+  const [allTodos, setTodos] = useState([]); // Contain all to-do list items
+  const [newTitle, setNewTitle] = useState(''); // To-do title input
+  const [newDescription, setNewDescription] = useState(''); // To-do description input
+  const [newPriority, setNewPriority] = useState(''); // To-do priority input
 
   const handleAddTodo = () => {
     let newTodoItem = {
@@ -18,9 +18,13 @@ function App() {
       priority: newPriority,
     }
 
-    let updatedTodoArr = [...allTodos];
+    let updatedTodoArr = [...allTodos]; // Create a copy of the current todos array
     updatedTodoArr.push(newTodoItem);
     setTodos(updatedTodoArr);
+  }
+
+  const handlePriorityChange = (e) => {
+    setNewPriority(e.target.value);
   }
 
   return (
@@ -60,7 +64,7 @@ function App() {
 
           <div className='todo-input-item'>
             <label>Priority</label>
-              <select>
+              <select value={newPriority} onChange={handlePriorityChange}>
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option>
@@ -96,7 +100,8 @@ function App() {
                 <div className='todo-list-item' key={index}>
                   <div>
                     <h3>{item.title}</h3>
-                    <p>Description</p>
+                    <p>{item.description}</p>
+                    <p>Priority: {item.priority}</p>
                   </div>
 
                   <div className='todo-list-item-icons'>
