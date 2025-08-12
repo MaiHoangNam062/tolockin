@@ -60,6 +60,14 @@ function App() {
     localStorage.setItem('completedTodos', JSON.stringify(updatedCompletedArr));
   }
 
+  const handleDeleteCompletedTodo = (index) => {
+    let reducedTodos = [...completedTodos];
+    reducedTodos.splice(index);
+
+    localStorage.setItem('completedTodos', JSON.stringify(reducedTodos));
+    setCompletedTodos(reducedTodos);
+  }
+
   useEffect(() => {
     let savedTodos = JSON.parse(localStorage.getItem('todolist'));
     let saveCompletedTodos = JSON.parse(localStorage.getItem('completedTodos'));
@@ -170,7 +178,7 @@ function App() {
                   </div>
 
                   <div className='todo-list-item-icons'>
-                    <MdOutlineDeleteOutline className='delete-icon' onClick={()=>handleDeleteTodo(index)}/>
+                    <MdOutlineDeleteOutline className='delete-icon' onClick={()=>handleDeleteCompletedTodo(index)}/>
                   </div>
                 </div>
               )
