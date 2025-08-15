@@ -11,6 +11,7 @@ function App() {
   const [newDescription, setNewDescription] = useState(''); // To-do description input
   const [newPriority, setNewPriority] = useState(''); // To-do priority input
   const [completedTodos, setCompletedTodos] = useState([]);
+  const [currentEdit, setCurrentEdit] = useState(""); // For editing a todo item
 
   const handleAddTodo = () => {
     let newTodoItem = {
@@ -32,7 +33,7 @@ function App() {
 
   const handleDeleteTodo = (index) => {
     let reducedTodos = [...allTodos];
-    reducedTodos.splice(index);
+    reducedTodos.splice(index, 1);
 
     localStorage.setItem('todolist', JSON.stringify(reducedTodos));
     setTodos(reducedTodos);
@@ -62,7 +63,7 @@ function App() {
 
   const handleDeleteCompletedTodo = (index) => {
     let reducedTodos = [...completedTodos];
-    reducedTodos.splice(index);
+    reducedTodos.splice(index, 1);
 
     localStorage.setItem('completedTodos', JSON.stringify(reducedTodos));
     setCompletedTodos(reducedTodos);
@@ -148,9 +149,21 @@ function App() {
                 <FaCalendarCheck className='check-icon' />
               </div>
             </div> */}
-
+            
             {isCompleteScreen === false && allTodos.map((item, index) => {
-              return (
+              if(currentEdit === index) {
+                <div className = 'edit-wrapper'>
+                  <input placeholder='Updated Title' 
+                  onChange = {(e) => handleUpdateTitle(e.target.value)} 
+                  value={currentEditedItem.title}/>
+                  
+                  <textarea placeholder='Updated Description' 
+                  onChange = {(e) => handleUpdateDescription(e.target.value)} 
+                  value={currentEditedItem.description}/>
+                </div>
+              } 
+              else {
+                return (
                 <div className='todo-list-item' key={index}>
                   <div>
                     <h3>{item.title}</h3>
@@ -161,9 +174,12 @@ function App() {
                   <div className='todo-list-item-icons'>
                     <MdOutlineDeleteOutline className='delete-icon' onClick={()=>handleDeleteTodo(index)}/>
                     <FaCalendarCheck className='check-icon' onClick={()=>handleCompletedTodo(index)}/>
+                    <FaCalendarCheck className='check-icon' onClick={()=>handleCompletedTodo(index)}/>
                   </div>
                 </div>
               )
+              }
+              
             }
             )}
 
