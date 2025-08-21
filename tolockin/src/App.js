@@ -84,17 +84,28 @@ function App() {
   }, [])
 
   const handleEdit = (ind, item) => {
-    
+    console.log(ind, item);
     setCurrentEdit(ind);
     setCurrentEditedItem(item);
   }
 
   const handleUpdateTitle = (value) => {
-
+    setCurrentEditedItem((prev) => {
+      return { ...prev, title: value }
+    })
   }
 
   const handleUpdateDescription = (value) => {
+    setCurrentEditedItem((prev) => {
+      return { ...prev, description: value }
+    })
+  }
 
+  const handleUpdateTodo = () => {
+    let newTodos = [...allTodos];
+    newTodos[currentEdit] = currentEditedItem;
+    setTodos(newTodos);
+    setCurrentEdit("");
   }
 
   return (
@@ -139,15 +150,20 @@ function App() {
           <div className='todo-list'>
             {isCompleteScreen === false && allTodos.map((item, index) => {
               if(currentEdit === index) {
-                <div className = 'edit-wrapper'>
+                return (
+                  <div className = 'edit-wrapper' key={index}>
                   <input placeholder='Updated Title' 
                   onChange = {(e) => handleUpdateTitle(e.target.value)} 
                   value={currentEditedItem.title}/>
                   
                   <textarea placeholder='Updated Description' 
+                  rows = {4}
                   onChange = {(e) => handleUpdateDescription(e.target.value)} 
                   value={currentEditedItem.description}/>
+                  <button type='button' onClick={handleUpdateTodo} className='primaryBtn'>Update</button>
                 </div>
+                )
+
               } 
               else {
                 return (
