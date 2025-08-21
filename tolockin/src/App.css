@@ -185,3 +185,16 @@ h1 {
 .check-icon:hover {
   color: green;
 }
+
+.edit-wrapper {
+  background-color: #131312;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-wrapper input {
+  border: 1px solid lightgray;
+  padding: 5px 10px;
+  margin: 5px;
+}

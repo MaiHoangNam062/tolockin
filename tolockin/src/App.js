@@ -84,6 +84,7 @@ function App() {
   }, [])
 
   const handleEdit = (ind, item) => {
+    
     setCurrentEdit(ind);
     setCurrentEditedItem(item);
   }
@@ -98,23 +99,6 @@ function App() {
 
   return (
     <div className="App">
-      {/*
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      */}
-
       <h1>ToLockIn</h1>
 
       {/* To-do input items */}
@@ -153,18 +137,6 @@ function App() {
           </div>
 
           <div className='todo-list'>
-            {/* <div className='todo-list-item'>
-              <div>
-                <h3>Task 1</h3>
-                <p>Description</p>
-              </div>
-
-              <div className='todo-list-item-icons'>
-                <MdOutlineDeleteOutline className='delete-icon' />
-                <FaCalendarCheck className='check-icon' />
-              </div>
-            </div> */}
-            
             {isCompleteScreen === false && allTodos.map((item, index) => {
               if(currentEdit === index) {
                 <div className = 'edit-wrapper'>
