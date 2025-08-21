@@ -3,6 +3,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { FaCalendarCheck } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 
 function App() {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
@@ -12,6 +13,7 @@ function App() {
   const [newPriority, setNewPriority] = useState(''); // To-do priority input
   const [completedTodos, setCompletedTodos] = useState([]);
   const [currentEdit, setCurrentEdit] = useState(""); // For editing a todo item
+  const [currentEditedItem, setCurrentEditedItem] = useState("");
 
   const handleAddTodo = () => {
     let newTodoItem = {
@@ -80,6 +82,19 @@ function App() {
       setCompletedTodos(saveCompletedTodos);
     }
   }, [])
+
+  const handleEdit = (ind, item) => {
+    setCurrentEdit(ind);
+    setCurrentEditedItem(item);
+  }
+
+  const handleUpdateTitle = (value) => {
+
+  }
+
+  const handleUpdateDescription = (value) => {
+
+  }
 
   return (
     <div className="App">
@@ -172,9 +187,9 @@ function App() {
                   </div>
 
                   <div className='todo-list-item-icons'>
-                    <MdOutlineDeleteOutline className='delete-icon' onClick={()=>handleDeleteTodo(index)}/>
-                    <FaCalendarCheck className='check-icon' onClick={()=>handleCompletedTodo(index)}/>
-                    <FaCalendarCheck className='check-icon' onClick={()=>handleCompletedTodo(index)}/>
+                    <MdOutlineDeleteOutline className='delete-icon' onClick={()=>handleDeleteTodo(index)} title = 'Delete'/>
+                    <FaCalendarCheck className='check-icon' onClick={()=>handleCompletedTodo(index)} title = 'Complete'/>
+                    <MdEdit className='edit-icon' onClick={() => handleEdit(index, item)} title = 'Edit'/>
                   </div>
                 </div>
               )
